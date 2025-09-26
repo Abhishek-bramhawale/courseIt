@@ -78,10 +78,10 @@ adminRouter.post("/course",adminMiddleware,async function(req,res){  //adding a 
 
 })
 
-adminRouter.put("/course",async function(req,res){ 
+adminRouter.put("/course",adminMiddleware,async function(req,res){ 
     const adminId=req.userId;
-
-    const {title, description, imageURL, price}= req.body;
+    const {courseId, title, description, imageURL, price}= req.body;
+    
     const course= await courseModel.updateOne({
         _id:courseId,
         creatorId:adminId
@@ -90,8 +90,8 @@ adminRouter.put("/course",async function(req,res){
     })
 
     res.json({
-        msg:"course created",
-        courseId:course._id
+        msg:"course updated",
+        courseId:courseId
     })
 })
 
