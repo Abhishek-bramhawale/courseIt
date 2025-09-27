@@ -6,9 +6,12 @@ function userMiddleware(req,res,next){
     const decodedInfo=jwt.verify(token,JWT_SECRET_USER);
     if(decodedInfo){
         req.userId=decodedInfo.id
+        next();
     }else{
         res.status(403).json({
             msg:"you arent logged in"
         })
     }
 }
+
+module.exports = { userMiddleware };

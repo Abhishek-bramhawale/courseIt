@@ -1,4 +1,4 @@
-require('dotenv').config
+require('dotenv').config();
 const express= require("express")
 const courseRouter=require("./routes/course")
 const userRouter=require("./routes/user")
