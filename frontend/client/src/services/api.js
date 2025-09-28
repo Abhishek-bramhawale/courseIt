@@ -9,7 +9,6 @@ const api = axios.create({
   },
 });
 
-// Add token to requests if available
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -18,7 +17,6 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Admin API calls
 export const adminAPI = {
   signUp: (data) => api.post('/admin/signUp', data),
   signIn: (data) => api.post('/admin/signIn', data),
@@ -27,14 +25,12 @@ export const adminAPI = {
   getCourses: () => api.get('/admin/courses/bulk'),
 };
 
-// User API calls
 export const userAPI = {
   signUp: (data) => api.post('/user/signUp', data),
   signIn: (data) => api.post('/user/signIn', data),
   getPurchases: () => api.get('/user/purchases'),
 };
 
-// Course API calls
 export const courseAPI = {
   purchaseCourse: (courseId) => api.post('/course/purchase', { courseId }),
   getCoursePreview: () => api.get('/course/preview'),
