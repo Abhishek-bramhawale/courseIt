@@ -59,7 +59,7 @@ userRouter.post("/signIn",async function(req,res){
 
 })
 
-userRouter.get("/purchases",userMiddleware, async function(req,res){
+userRouter.get("/purchases",userMiddleware, async function(req,res){ //user purchased courses
 
     const userId=req.userId;
 

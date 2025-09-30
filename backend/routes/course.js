@@ -3,7 +3,7 @@ const courseRouter= Router();
 const {userMiddleware}= require("../middlewares/user");
 const { purchaseModel, courseModel } = require('../db');
 
-courseRouter.post("/purchase",userMiddleware,async function(req,res){
+courseRouter.post("/purchase",userMiddleware,async function(req,res){ //user purchasing course
     const userId= req.userId;
     const courseId= req.body.courseId
 
@@ -17,7 +17,7 @@ courseRouter.post("/purchase",userMiddleware,async function(req,res){
     })
 })
 
-courseRouter.get("/preview",async function(req,res){
+courseRouter.get("/preview",async function(req,res){  //seeing all available courses
 
     const courses= await courseModel.find({});
 

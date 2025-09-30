@@ -1,27 +1,27 @@
 import { useState } from 'react';
 import { adminAPI } from '../services/api';
 
-const AdminSignIn = ({ onSuccess }) => {
+const AdminSignIn = ({ onSuccess })=>{
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
   const [message, setMessage] = useState('');
 
-  const handleChange = (e) => {
+  const handleChange = (e)=>{
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) =>{
     e.preventDefault();
     try {
       const response = await adminAPI.signIn(formData);
       localStorage.setItem('token', response.data);
       localStorage.setItem('userType', 'admin');
-      setMessage('Successfully signed in!');
+      setMessage('Successfully signed inn');
       if (onSuccess) onSuccess();
     } catch (error) {
       setMessage('Error: ' + (error.response?.data?.msg || 'Something went wrong'));

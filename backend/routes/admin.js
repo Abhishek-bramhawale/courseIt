@@ -78,7 +78,7 @@ adminRouter.post("/course",adminMiddleware,async function(req,res){  //adding a 
 
 })
 
-adminRouter.put("/course",adminMiddleware,async function(req,res){ 
+adminRouter.put("/course",adminMiddleware,async function(req,res){  //course edit
     const adminId=req.userId;
     const {courseId, title, description, imageURL, price}= req.body;
     
@@ -95,7 +95,7 @@ adminRouter.put("/course",adminMiddleware,async function(req,res){
     })
 })
 
-adminRouter.get("/courses/bulk",adminMiddleware,async function(req,res){
+adminRouter.get("/courses/bulk",adminMiddleware,async function(req,res){ //see all courses
     const adminId= req.userId;
     const courses=await courseModel.find({
         creatorId:adminId
