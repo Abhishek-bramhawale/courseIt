@@ -3,9 +3,9 @@ import AdminSignUp from './components/AdminSignUp';
 import AdminSignIn from './components/AdminSignIn';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
-// import CourseForm from './components/CourseForm';
-// import CourseList from './components/CourseList';
-// import CoursePreview from './components/CoursePreview';
+import CourseForm from './components/CourseForm';
+import CourseList from './components/CourseList';
+import CoursePreview from './components/CoursePreview';
 import './App.css';
 
 function App() {

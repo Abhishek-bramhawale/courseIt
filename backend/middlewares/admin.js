@@ -2,7 +2,8 @@ const JWT_ADMINSECRET=process.env.JWT_ADMINSECRET
 const jwt= require("jsonwebtoken");
 
 function adminMiddleware(req,res,next){
-    const token= req.headers.token;
+    const authHeader = req.headers.authorization;
+    const token = authHeader && authHeader.split(' ')[1];
 
     const decodedInfo= jwt.verify(token,JWT_ADMINSECRET);
     if(decodedInfo){

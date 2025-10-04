@@ -6,7 +6,7 @@ const jwt= require("jsonwebtoken");
 const {z}=require("zod")
 const {adminMiddleware}=require("../middlewares/admin");
 
-const {adminModel, userModel, courseModel}=require("../db")
+const {adminModel, courseModel}=require("../db")
 
 adminRouter.post("/signUp",async function(req,res){
     const requiredBody=z.object({
@@ -31,8 +31,8 @@ adminRouter.post("/signUp",async function(req,res){
     })
     res.json({
         msg:"user sign up"
-    })}catch(e){
-        res.send("error occured")
+    })    }catch(e){
+        return res.send("error occured")
     }
 })
 
@@ -44,7 +44,7 @@ adminRouter.post("/signIn", async function(req,res){
         email:email 
     })
     if(!responce){
-        res.send("user doesnt exist")
+        return res.send("user doesnt exist")
     }
 
     const passwordMatch= await bcrypt.compare(password,responce.password);

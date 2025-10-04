@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { adminAPI } from '../services/api';
-import axios from "axios";
 
-const AdminSignUp = ({ onSuccess }) => {
+const CourseForm =({ onCourseCreated })=>{
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: ''
+    title: '',
+    description: '',
+    imageURL: '',
+    price: ''
   });
-  const [message, setMessage] = useState('');
+  const[message, setMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -18,12 +17,13 @@ const AdminSignUp = ({ onSuccess }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =async (e) =>{
     e.preventDefault();
     try {
-      const response = await adminAPI.signUp(formData);
+      const response = await adminAPI.createCourse(formData);
       setMessage(response.data.msg);
-      if (onSuccess) onSuccess();
+      setFormData({ title: '', description: '', imageURL: '', price: '' });
+      if (onCourseCreated) onCourseCreated();
     } catch (error) {
       setMessage('Error: ' + (error.response?.data?.msg || 'Something went wrong'));
     }
@@ -31,55 +31,54 @@ const AdminSignUp = ({ onSuccess }) => {
 
   return (
     <div>
-      <h2>Admin Sign Up</h2>
+      <h2>Create Course</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <input
             type="text"
-            name="firstName"
-            placeholder="First Name"
-            value={formData.firstName}
+            name="title"
+            placeholder="Course Title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <textarea
+            name="description"
+            placeholder="Course Description"
+            value={formData.description}
             onChange={handleChange}
             required
           />
         </div>
         <div>
           <input
-            type="text"
-            name="lastName"
-            placeholder="Last Name"
-            value={formData.lastName}
+            type="url"
+            name="imageURL"
+            placeholder="Image URL"
+            value={formData.imageURL}
             onChange={handleChange}
             required
           />
         </div>
-        <button type="submit">Sign Up</button>
+        <div>
+          <input
+            type="number"
+            name="price"
+            placeholder="Price"
+            value={formData.price}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button type="submit">Create Course</button>
       </form>
       {message && <p>{message}</p>}
     </div>
   );
 };
 
-export default AdminSignUp;
+export default CourseForm;
 
 
